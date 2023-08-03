@@ -1,0 +1,27 @@
+.\" Manpage for xkcd.
+.\" Contact mazunki@github.com to correct errors or typos.
+.TH man 7 "03 Aug 2023" "1.0" "xkcd handler man page"
+.SH NAME
+xkcd \- XKCD comic handler script
+.SH SYNOPSIS
+xkcd <number>
+.br
+xkcd xkcd://<number>
+.SH DESCRIPTION
+xkcd is a script that opens a specific XKCD comic in the default web browser. It accepts either a number or a URL in the format xkcd://<number>. 
+
+XKCD is a webcomic of romance, sarcasm, math, and language created by Randall Munroe. The comic's tagline is "A webcomic of romance, sarcasm, math, and language". There is no specific subject matter or storyline in the comic, although there are occasional mini-series and recurring themes.
+
+.SH OPTIONS
+.IP "-h, --help"
+Show the usage message and exit.
+.IP "-v, --version"
+Show the version number and exit.
+.SH EXAMPLES
+xkcd 2497
+.br
+xkcd xkcd://2497
+.SH SEE ALSO
+The XKCD webcomic can be found at https://xkcd.com.
+.SH AUTHOR
+Mazunki Hoksaas (mazunki@github.com)
