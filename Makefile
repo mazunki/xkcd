@@ -19,6 +19,7 @@ uninstall:
 	rm -f $(DESTDIR)$(APPSDIR)/xkcd.desktop
 
 release:
+	git ls-files -m | grep -q xkcd && echo "Make sure to commit xkcd first." && exit 1
 	git tag -d v$(oldversion)
 	git tag v$(newversion)
 	@# note that || : is required because mv fails if src and dest are the same file
@@ -27,5 +28,5 @@ release:
 	git add dist/
 
 
-.PHONY: install uninstall
+.PHONY: install uninstall release
 
