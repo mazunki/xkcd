@@ -1,0 +1,22 @@
+#!/bin/sh
+set -eu
+usage() {
+	printf "xkcd <number> || xkcd xkcd://<number>\n"
+	return
+}
+
+printerr() {
+	printf "[error] %s: %s\n" "$0" "$1"
+	exit 1
+}
+
+set -- "${1#xkcd://}"
+
+case "$1" in
+	'') usage ;;
+	-h|--help) usage ;;
+	*[!0-9]*) printerr "Invalid parameter: $1" ;;
+esac
+
+exec xdg-open https://xkcd.com/"$1"
+

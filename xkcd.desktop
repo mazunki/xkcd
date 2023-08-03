@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=XKCD Handler
+Exec=xkcd %u
+StartupNotify=false
+MimeType=x-scheme-handler/xkcd;
