@@ -3,7 +3,7 @@ BINDIR ?= $(PREFIX)/bin
 APPSDIR ?= $(PREFIX)/share/applications
 MANDIR ?= $(PREFIX)/share/man
 
-oldversion = $(shell git describe --tags | tr -d 'v')
+oldversion = $(shell git describe --abbrev=0 --tags | tr -d 'v')
 newversion = $(shell sed -n '/VERSION/s/VERSION="\(.*\)"/\1/p' xkcd)
 
 default:
