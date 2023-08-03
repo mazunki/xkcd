@@ -3,6 +3,9 @@ BINDIR ?= $(PREFIX)/bin
 APPSDIR ?= $(PREFIX)/share/applications
 MANDIR ?= $(PREFIX)/share/man
 
+oldversion = $(shell git describe --tags | tr -d 'v')
+newversion = $(shell sed -n '/VERSION/s/VERSION="\(.*\)"/\1/p' xkcd)
+
 default:
 	@echo "Nothing to compile. Run make install instead."
 
@@ -14,6 +17,15 @@ install:
 uninstall:
 	rm -f $(DESTDIR)$(BINDIR)/xkcd
 	rm -f $(DESTDIR)$(APPSDIR)/xkcd.desktop
+
+release:
+	git tag -d v$(oldversion)
+	git tag v$(newversion)
+	@# note that || : is required because mv fails if src and dest are the same file
+	mv dist/gentoo/xkcd-handler-$(oldversion).ebuild dist/gentoo/xkcd-handler-$(newversion).ebuild || :
+	@# please add your dists here
+	git add dist/
+
 
 .PHONY: install uninstall
 
