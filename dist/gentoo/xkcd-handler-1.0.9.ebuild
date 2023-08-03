@@ -7,7 +7,7 @@ inherit xdg
 
 DESCRIPTION="A handler for XKCD urls"
 HOMEPAGE="https://xkcd.com/"
-SRC_URI="https://github.com/mazunki/xkcd/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/mazunki/xkcd/archive/refs/tags/v${PV}.tar.gz -> xkcd-${PV}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -17,7 +17,10 @@ IUSE=""
 DEPEND=""
 RDEPEND="x11-misc/xdg-utils"
 
+S="${WORKDIR}/xkcd-${PV}"
+
 src_install() {
 	dobin xkcd
-	doins xkcd.desktop
+	domenu xkcd.desktop
+	doman xkcd.1
 }
