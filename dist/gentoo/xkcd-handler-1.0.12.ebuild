@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit desktop
+inherit xdg desktop
 
 DESCRIPTION="A handler for XKCD urls"
 HOMEPAGE="https://xkcd.com/"
