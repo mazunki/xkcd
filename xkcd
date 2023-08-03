@@ -1,12 +1,20 @@
 #!/bin/sh
 set -eu
+VERSION="1.0.2"
+AUTHOR="mazunki"
+
+version() {
+	printf "v${VERSION:?} by ${AUTHOR:?}\n"
+	return
+}
+
 usage() {
 	printf "xkcd <number> || xkcd xkcd://<number>\n"
 	return
 }
 
 printerr() {
-	printf "[error] %s: %s\n" "$0" "$1"
+	printf "[error] %s: %s\n" "$0" "$1" >&2
 	exit 1
 }
 
@@ -14,7 +22,8 @@ set -- "${1#xkcd://}"
 
 case "$1" in
 	'') usage ;;
-	-h|--help) usage ;;
+	-h|--help) usage; exit ;;
+	-v|--version) version; exit ;;
 	*[!0-9]*) printerr "Invalid parameter: $1" ;;
 esac
 
