@@ -20,12 +20,14 @@ uninstall:
 
 release:
 	git diff-files --quiet xkcd || { echo "Make sure to commit xkcd first."; exit 1; }
-	git tag -d v$(oldversion)
-	git tag v$(newversion)
 	@# note that || : is required because mv fails if src and dest are the same file
 	mv dist/gentoo/xkcd-handler-$(oldversion).ebuild dist/gentoo/xkcd-handler-$(newversion).ebuild || :
 	@# please add your dists here
+	git reset
 	git add dist/
+	git commit -m 'version bump'
+	git tag -d v$(oldversion)
+	git tag v$(newversion)
 
 
 .PHONY: install uninstall release
