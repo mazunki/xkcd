@@ -19,11 +19,12 @@ uninstall:
 	rm -f $(DESTDIR)$(APPSDIR)/xkcd.desktop
 
 release:
-	git diff-files --quiet xkcd || { echo "Make sure to commit xkcd first."; exit 1; }
+	git reset
+	git add xkcd
+	git diff-files --quiet || { echo "Can't release with uncommited changes"; exit 1; }
 	@# note that || : is required because mv fails if src and dest are the same file
 	mv dist/gentoo/xkcd-handler-$(oldversion).ebuild dist/gentoo/xkcd-handler-$(newversion).ebuild || :
 	@# please add your dists here
-	git reset
 	git add dist/
 	git commit -m 'version bump'
 	git tag -d v$(oldversion)
