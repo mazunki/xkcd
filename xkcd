@@ -18,6 +18,8 @@ printerr() {
 	exit 1
 }
 
+test $# -eq 1 || { usage; exit 1; }
+
 set -- "${1#xkcd://}"
 
 case "$1" in
