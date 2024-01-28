@@ -1,7 +1,8 @@
 #!/bin/sh
 set -eu
-VERSION="1.0.13"
+VERSION="1.1.0"
 AUTHOR="mazunki"
+ALIAS_FILE="/usr/share/xkcd/aliases"
 
 version() {
 	printf "v${VERSION:?} by ${AUTHOR:?}\n"
@@ -9,13 +10,21 @@ version() {
 }
 
 usage() {
-	printf "xkcd <number> || xkcd xkcd://<number>\n"
+	printf "xkcd <number|alias> || xkcd xkcd://<number|alias>\n"
 	return
 }
 
 printerr() {
 	printf "[error] %s: %s\n" "$0" "$1" >&2
 	exit 1
+}
+
+resolve() {
+	if test -f "${ALIAS_FILE}"; then
+		grep "^${1}:" "${ALIAS_FILE}" | cut -d':' -f2
+	else
+		printerr "no alias file"
+	fi
 }
 
 test $# -eq 1 || { usage; exit 1; }
@@ -26,7 +35,14 @@ case "$1" in
 	'') usage ;;
 	-h|--help) usage; exit ;;
 	-v|--version) version; exit ;;
-	*[!0-9]*) printerr "Invalid parameter: $1" ;;
+	*[!0-9]*)
+		resolved="$(resolve "$1")"
+		test -n "${resolved}" || {
+			printerr "invalid parameter or unknown alias: $1"
+		}
+
+		set -- "${resolved}"
+		;;
 esac
 
 exec xdg-open https://xkcd.com/"$1"
