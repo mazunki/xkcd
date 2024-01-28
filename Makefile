@@ -26,7 +26,7 @@ release:
 	mv dist/gentoo/xkcd-handler-$(oldversion).ebuild dist/gentoo/xkcd-handler-$(newversion).ebuild || :
 	@# please add your dists here
 	git add dist/
-	git commit -m 'version bump'
+	git commit
 	git tag -d v$(oldversion)
 	git tag v$(newversion)
 
