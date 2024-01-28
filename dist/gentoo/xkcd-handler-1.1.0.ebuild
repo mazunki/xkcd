@@ -23,4 +23,6 @@ src_install() {
 	dobin xkcd
 	domenu xkcd.desktop
 	doman xkcd.1
+	insinto xkcd
+	doins aliases
 }
