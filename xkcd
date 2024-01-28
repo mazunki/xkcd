@@ -1,8 +1,8 @@
 #!/bin/sh
 set -eu
-VERSION="1.1.0"
+VERSION="1.1.1"
 AUTHOR="mazunki"
-ALIAS_FILE="/usr/share/xkcd/aliases"
+ALIAS_FILE="/usr/share/xkcd/aliases"  # TODO: dynamic pathing
 
 version() {
 	printf "v${VERSION:?} by ${AUTHOR:?}\n"
