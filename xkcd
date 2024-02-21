@@ -1,6 +1,6 @@
 #!/bin/sh
 set -eu
-VERSION="1.1.3"
+VERSION="1.1.4"
 AUTHOR="mazunki"
 ALIAS_FILE="/usr/share/xkcd/aliases"  # TODO: dynamic pathing
 
